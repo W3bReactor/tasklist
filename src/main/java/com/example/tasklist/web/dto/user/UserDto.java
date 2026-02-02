@@ -1,7 +1,6 @@
 package com.example.tasklist.web.dto.user;
 
 
-
 import com.example.tasklist.web.dto.validation.OnCreate;
 import com.example.tasklist.web.dto.validation.OnUpdate;
 import com.fasterxml.jackson.annotation.JsonProperty;

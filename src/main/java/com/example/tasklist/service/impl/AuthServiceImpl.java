@@ -23,7 +23,7 @@ public class AuthServiceImpl implements AuthService {
     public JwtResponse login(JwtRequest loginRequest) {
         JwtResponse jwtResponse = new JwtResponse();
 //        Тут происходит проверка с помощью спец алгоритма на совпадения паролей (если не совпадает выбрасывается ошибка)
-        authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword() ));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         User user = userService.getByUsername(loginRequest.getUsername());
         jwtResponse.setId(user.getId());
         jwtResponse.setUsername(user.getUsername());

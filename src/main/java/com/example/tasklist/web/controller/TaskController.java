@@ -16,8 +16,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.plaf.SeparatorUI;
-
 @RestController
 @RequestMapping("/api/v1/tasks")
 @RequiredArgsConstructor

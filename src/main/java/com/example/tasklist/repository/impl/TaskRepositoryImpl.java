@@ -117,7 +117,7 @@ package com.example.tasklist.repository.impl;
 //            Connection connection = dataSourceConfig.getConnection();
 //            PreparedStatement statement = connection.prepareStatement(CREATE, PreparedStatement.RETURN_GENERATED_KEYS);
 //            statement.setString(1, task.getTitle());
-////            Нельзя сетать Null
+/// /            Нельзя сетать Null
 //            if(task.getDescription() == null) {
 //                statement.setNull(2, Types.VARCHAR);
 //            } else {

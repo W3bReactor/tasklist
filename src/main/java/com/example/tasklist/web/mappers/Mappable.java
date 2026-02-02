@@ -4,7 +4,10 @@ import java.util.List;
 
 public interface Mappable<E, D> {
     E toEntity(D dto);
+
     D toDto(E entity);
+
     List<D> toDto(List<E> entities);
-    List<E> toEntity(List<D> dtos);
+
+//    List<E> toEntity(List<D> dtos);
 }

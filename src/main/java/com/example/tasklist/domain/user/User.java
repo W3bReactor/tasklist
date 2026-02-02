@@ -41,5 +41,4 @@ public class User implements Serializable {
     private List<Task> tasks;
 
 
-
 }

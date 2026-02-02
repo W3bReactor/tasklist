@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
-import java.security.Key;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -74,7 +73,7 @@ public class JwtTokenProvider {
 
     public JwtResponse refreshUserTokens(String refreshToken) {
         JwtResponse jwtResponse = new JwtResponse();
-        if(!validateToken(refreshToken)) {
+        if (!validateToken(refreshToken)) {
             throw new AccessDeniedException();
         }
         Long userId = Long.valueOf(getId(refreshToken));
@@ -108,6 +107,7 @@ public class JwtTokenProvider {
                 .getPayload()
                 .get("id", String.class);
     }
+
     private String getUsername(String token) {
         return Jwts.parser()
                 .verifyWith(key)

@@ -5,13 +5,11 @@ import com.example.tasklist.domain.exception.*;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,9 +48,9 @@ public class ControllerAdvice {
         List<FieldError> errors = e.getBindingResult().getFieldErrors();
         exceptionBody.setErrors(
                 errors.stream()
-                .collect(Collectors
-                        .toMap(FieldError::getField, FieldError::getDefaultMessage)
-                )
+                        .collect(Collectors
+                                .toMap(FieldError::getField, FieldError::getDefaultMessage)
+                        )
         );
         return exceptionBody;
     }
@@ -87,7 +85,6 @@ public class ControllerAdvice {
         e.printStackTrace();
         return new ExceptionBody("Internal error.");
     }
-
 
 
 }
