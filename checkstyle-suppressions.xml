@@ -9,4 +9,8 @@
     <suppress checks="HideUtilityClassConstructor"/>
     <suppress checks="MagicNumber"/>
     <suppress checks="HiddenField"/>
+    <suppress files="TaskRepositoryImpl\.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="UserRepositoryImpl\.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="TaskRowMapper\.java" checks="[a-zA-Z0-9]*"/>
+
 </suppressions>

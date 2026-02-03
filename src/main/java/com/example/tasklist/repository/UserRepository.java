@@ -18,7 +18,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 //    void create(User user);
 
-//    void insertUserRole(@Param("userId") Long userId, @Param("role") Role role);
+//    void insertUserRole(
+//    @Param("userId") Long userId,
+//    @Param("role") Role role
+//    );
 
 
     @Query(value = """
@@ -29,7 +32,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
                 AND task_id = :taskId
             )
             """, nativeQuery = true)
-    boolean isTaskOwner(@Param("userId") Long userId, @Param("taskId") Long taskId);
+    boolean isTaskOwner(
+            @Param("userId") Long userId,
+            @Param("taskId") Long taskId
+    );
 
 
     Optional<User> findByUsername(String username);

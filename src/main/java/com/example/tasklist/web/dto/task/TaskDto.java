@@ -23,18 +23,32 @@ public class TaskDto {
     private Long id;
 
     @Schema(description = "Task title", example = "Something do")
-    @NotNull(message = "Title must be not null.", groups = {OnCreate.class, OnUpdate.class})
-    @Length(max = 255, message = "Title length must be smaller than 255 symbols.", groups = {OnCreate.class, OnUpdate.class})
+    @NotNull(
+            message = "Title must be not null.",
+            groups = {OnCreate.class, OnUpdate.class}
+    )
+    @Length(
+            max = 255,
+            message = "Title length must be smaller than 255 symbols.",
+            groups = {OnCreate.class, OnUpdate.class}
+    )
     private String title;
 
     @Schema(description = "Task description", example = "We can do something")
-    @Length(max = 255, message = "Description length must be smaller than 255 symbols.", groups = {OnCreate.class, OnUpdate.class})
+    @Length(
+            max = 255,
+            message = "Description length must be smaller than 255 symbols.",
+            groups = {OnCreate.class, OnUpdate.class}
+    )
     private String description;
 
     @Schema(description = "Task status", example = "TODO")
     private Status status;
 
-    @Schema(description = "Task expiration date", example = "2023-01-29 12:00:00.000000")
+    @Schema(
+            description = "Task expiration date",
+            example = "2023-01-29 12:00:00.000000"
+    )
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime expirationDate;
