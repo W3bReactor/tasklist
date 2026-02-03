@@ -19,13 +19,13 @@ services:
       - redis
     env_file:
       - .env
-#    environment:
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/tasklist?currentSchema=tasklist
-#      - SPRING_DATASOURCE_USERNAME=postgres
-#      - SPRING_DATASOURCE_PASSWORD=JustIsJust
-#      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+    #    environment:
+    #      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/tasklist?currentSchema=tasklist
+    #      - SPRING_DATASOURCE_USERNAME=postgres
+    #      - SPRING_DATASOURCE_PASSWORD=JustIsJust
+    #      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
     ports:
-#    наша машина:машина контейнера
+      #    наша машина:машина контейнера
       - '8080:8080'
 
   db:

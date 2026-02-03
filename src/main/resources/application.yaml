@@ -10,16 +10,16 @@ spring:
       port: 6379
       password: ${REDIS_PASSWORD}
   datasource:
-#    здесь нужно менять в зависимости от того, что нужно сделать запустить приложение - postgres, а для docker - tasklist
+    #    здесь нужно менять в зависимости от того, что нужно сделать запустить приложение - postgres, а для docker - tasklist
     url: jdbc:postgresql://${HOST}:5432/${POSTGRES_DATABASE}?currentSchema=${POSTGRES_SCHEMA}
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
-#  sql:
-#    init:
-#      mode: never
-#      continue-on-error: false
-#      data-locations: classpath:demo_data.sql
+  #  sql:
+  #    init:
+  #      mode: never
+  #      continue-on-error: false
+  #      data-locations: classpath:demo_data.sql
   liquibase:
     change-log: classpath:liquibase/db.changelog.yaml
     enabled: true

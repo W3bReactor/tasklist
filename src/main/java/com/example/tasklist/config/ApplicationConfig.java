@@ -22,7 +22,6 @@ import org.springframework.security.access.expression.method.MethodSecurityExpre
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -37,7 +36,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 //@EnableMethodSecurity
 //2 Способ тока так работает
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@RequiredArgsConstructor(onConstructor_ = @__(@Lazy) )
+@RequiredArgsConstructor(onConstructor_ = @__(@Lazy))
 public class ApplicationConfig {
 
     private final ApplicationContext applicationContext;
@@ -48,7 +47,8 @@ public class ApplicationConfig {
     public MinioClient minioClient() {
         return MinioClient.builder()
                 .endpoint(minioProperties.getUrl())
-                .credentials(minioProperties.getAccessKey(), minioProperties.getSecretKey())
+                .credentials(minioProperties.getAccessKey(),
+                        minioProperties.getSecretKey())
                 .build();
     }
 
@@ -58,13 +58,16 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+    public AuthenticationManager authenticationManager(
+            final AuthenticationConfiguration configuration
+    ) throws Exception {
         return configuration.getAuthenticationManager();
     }
 
     @Bean
     public MethodSecurityExpressionHandler expressionHandler() {
-        DefaultMethodSecurityExpressionHandler expressionHandler = new CustomSecurityExceptionHandler();
+        DefaultMethodSecurityExpressionHandler expressionHandler
+                = new CustomSecurityExceptionHandler();
         expressionHandler.setApplicationContext(applicationContext);
         return expressionHandler;
     }
@@ -72,7 +75,8 @@ public class ApplicationConfig {
     @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()
-                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
+                .addSecurityItem(new SecurityRequirement()
+                        .addList("bearerAuth"))
                 .components(
                         new Components()
                                 .addSecuritySchemes("bearerAuth",
@@ -88,24 +92,43 @@ public class ApplicationConfig {
                         .version("1.0")
                 );
     }
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain filterChain(final HttpSecurity httpSecurity)
+            throws Exception {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors.disable())
+                .cors(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(
+                        session ->
+                                session
+                                        .sessionCreationPolicy(
+                                                SessionCreationPolicy.STATELESS
+                                        )
+                )
                 .exceptionHandling(exception -> {
-                            exception.authenticationEntryPoint(
+                            exception
+                                    .authenticationEntryPoint(
                                     (request, response, authException) -> {
-                                        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                                        response.getWriter().write("Unauthorized.");
+                                        response.setStatus(
+                                                HttpStatus.UNAUTHORIZED.value()
+                                        );
+                                        response.getWriter()
+                                                .write("Unauthorized.");
                                     }
                             );
                             exception.accessDeniedHandler(
-                                    (request, response, accessDeniedException) -> {
-                                        response.setStatus(HttpStatus.FORBIDDEN.value());
-                                        response.getWriter().write("Unauthorized.");
+                                    (
+                                            request,
+                                     response,
+                                     accessDeniedException
+                                    ) -> {
+                                        response.setStatus(
+                                                HttpStatus.FORBIDDEN.value()
+                                        );
+                                        response.getWriter()
+                                                .write("Unauthorized.");
                                     });
                         }
                 )
@@ -117,7 +140,8 @@ public class ApplicationConfig {
                                 .anyRequest().authenticated()
                 )
                 .anonymous(AbstractHttpConfigurer::disable)
-                .addFilterBefore(new JwtTokenFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtTokenFilter(tokenProvider),
+                        UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }

@@ -23,11 +23,11 @@
     </select>
 
     <select id="findAllByUserId" resultMap="TaskResultMap">
-        SELECT t.id              as task_id,
-        t.title           as task_title,
-        t.description     as task_description,
+        SELECT t.id as task_id,
+        t.title as task_title,
+        t.description as task_description,
         t.expiration_date as task_expiration_date,
-        t.status          as task_status
+        t.status as task_status
         FROM tasks t
         JOIN users_tasks ut on t.id = ut.task_id
         WHERE ut.user_id = #{userId}
@@ -42,13 +42,13 @@
         INSERT INTO users_tasks (task_id, user_id)
         VALUES (#{taskId}, #{userId})
     </insert>
-    
+
     <update id="update">
         UPDATE tasks
-        SET title           = #{title},
-        description     = #{description},
+        SET title = #{title},
+        description = #{description},
         expiration_date = #{expirationDate},
-        status          = #{status}
+        status = #{status}
         WHERE id = ?
     </update>
 
